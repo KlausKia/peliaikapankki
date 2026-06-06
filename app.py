@@ -848,9 +848,9 @@ with tab_vanhempi:
                             st.rerun()
 
 # ── PALAUTELINKKI (näkyy kaikilla välilehdillä) ──────────────────────
-st.markdown(f"""
+st.markdown("""
 <div style="text-align:center;padding:24px 0 8px 0;border-top:1px solid #E0E7FF;margin-top:24px;">
-    <a href="{PALAUTE_LINKKI}" target="_blank" style="
+    <a href="https://forms.gle/PqJZb8UrjAceSLKc7" target="_blank" style="
         display:inline-flex;align-items:center;gap:8px;
         background:#F5F3FF;border:1.5px solid #DDD6FF;border-radius:12px;
         padding:10px 20px;text-decoration:none;
