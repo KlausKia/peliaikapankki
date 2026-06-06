@@ -808,13 +808,19 @@ with tab_vanhempi:
                 st.markdown("**Lisää uusi tehtävä**")
                 suositut = db.hae_suositut_tehtavat()
                 if suositut:
-                    with st.expander("Mitä muut perheet käyttävät?"):
+                    if "osio_suositut" not in st.session_state:
+                        st.session_state.osio_suositut = False
+                    merkki = "▼" if st.session_state.osio_suositut else "▶"
+                    if st.button(f"{merkki} Mitä muut perheet käyttävät?", key="btn_suositut", use_container_width=True):
+                        st.session_state.osio_suositut = not st.session_state.osio_suositut
+                        st.rerun()
+                    if st.session_state.osio_suositut:
                         for s in suositut[:8]:
                             if st.button(f"+ {s['nimi']} ({int(s['keskiarvo_min'])} min) — {s['perheita']} perhettä",
                                          key=f"suositus_{s['nimi']}"):
                                 db.lisaa_tehtava(family_id, s["nimi"], int(s["keskiarvo_min"]), s["kategoria"], False)
                                 lataa_perhedata()
-                                st.success(f"'{s['nimi']}' lisätty!")
+                                st.success(f"'{s['nimi']} lisätty!")
                                 st.rerun()
                 uusi_tnimi = st.text_input("Tehtävän nimi", key="uusi_tehtava_nimi")
                 uusi_tmin = st.number_input("Peliaika (min)", min_value=5, max_value=300, value=15, step=5, key="uusi_tehtava_min")
