@@ -24,7 +24,7 @@ CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
 
 html, body, [data-testid="stAppViewContainer"] {
-    background-color: #F8F6FF;
+    background-color: #F0F7FF;
     font-family: 'Space Grotesk', sans-serif !important;
 }
 h1, h2, h3, p, div, span, button, input, label {
@@ -32,15 +32,26 @@ h1, h2, h3, p, div, span, button, input, label {
 }
 h1 { font-size: 2rem !important; }
 
+/* ── Logo ── */
 .playrn-logo { text-align: center; padding: 16px 0 8px 0; }
 .playrn-nimi {
     font-size: 3rem; font-weight: 800; letter-spacing: -1px;
-    background: linear-gradient(90deg, #7C3AED, #38BDF8, #34D399);
+    background: linear-gradient(90deg, #7C3AED, #06B6D4, #10B981);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     line-height: 1.1;
 }
 .playrn-tagline { font-size: 0.75rem; color: #A78BFA; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
 
+/* ── Header sovelluksessa ── */
+.playrn-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+.playrn-header-nimi {
+    font-size: 1.8rem; font-weight: 800;
+    background: linear-gradient(90deg, #7C3AED, #06B6D4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.playrn-header-tagline { font-size: 0.65rem; color: #94A3B8; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* ── Login ── */
 .login-box {
     background: #fff; border: 1.5px solid #DDD6FF; border-radius: 24px;
     padding: 28px 20px; max-width: 360px; margin: 16px auto 0 auto; text-align: center;
@@ -49,42 +60,88 @@ h1 { font-size: 2rem !important; }
 .login-otsikko    { font-size: 1.1rem; font-weight: 700; color: #3730A3; margin-bottom: 4px; }
 .login-alaotsikko { font-size: 0.8rem; color: #A78BFA; margin-bottom: 20px; letter-spacing: 0.05em; }
 
-.odottava-kortti {
-    background: #FFFBEB; border-left: 3px solid #F59E0B;
-    border-radius: 0 12px 12px 0; padding: 12px 16px; margin-bottom: 10px;
+/* ── Tehtävänapit lapsille ── */
+.tehtava-nappi {
+    background: #fff;
+    border: 2px solid #E0E7FF;
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    width: 100%;
 }
-.historia-rivi {
-    background: #fff; border: 1px solid #EDE9FF;
-    border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; font-size: 0.9rem; color: #3730A3;
+.tehtava-nimi { font-size: 0.95rem; font-weight: 600; color: #1E1B4B; }
+.tehtava-pts {
+    background: linear-gradient(135deg, #7C3AED, #06B6D4);
+    color: #fff; border-radius: 10px; padding: 4px 12px;
+    font-size: 0.85rem; font-weight: 700; white-space: nowrap;
 }
-.raportti-kortti {
-    background: #fff; border: 1.5px solid #EDE9FF;
-    border-radius: 14px; padding: 16px; margin-bottom: 10px;
+.tehtava-pts.bonus { background: linear-gradient(135deg, #F59E0B, #EF4444); }
+.kat-otsikko {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; font-weight: 700; color: #94A3B8;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin: 14px 0 8px 0;
 }
-.raportti-otsikko { font-size: 0.75rem; color: #A78BFA; text-transform: uppercase; letter-spacing: 0.08em; }
-.raportti-arvo    { font-size: 1.8rem; font-weight: 800; color: #3730A3; }
+.kat-viiva { flex: 1; height: 1px; background: #E0E7FF; }
 
+/* ── Vahvistuskortti ── */
 .vahvistus-kortti {
-    background: #F5F3FF; border: 2px solid #7C3AED;
+    background: linear-gradient(135deg, #F5F3FF, #E0F7FF);
+    border: 2px solid #A78BFA;
     border-radius: 24px; padding: 28px 20px; text-align: center; margin-bottom: 16px;
 }
-.vahvistus-tehtava { font-size: 1.3rem; font-weight: 700; color: #3730A3; margin-bottom: 6px; }
-.vahvistus-min { font-size: 2.2rem; font-weight: 800; color: #7C3AED; }
+.vahvistus-tehtava { font-size: 1.3rem; font-weight: 800; color: #3730A3; margin-bottom: 6px; }
+.vahvistus-min { font-size: 2.4rem; font-weight: 800; color: #7C3AED; }
 .vahvistus-teksti { font-size: 0.85rem; color: #A78BFA; margin-top: 4px; }
 
-.badge { display: inline-block; background: #F5F3FF; border: 1px solid #DDD6FF; border-radius: 10px; padding: 8px 10px; margin: 4px; text-align: center; min-width: 80px; }
-.badge.saavutettu { border-color: #7C3AED; background: #EDE9FF; }
-.badge-ikoni { font-size: 1.5rem; }
-.badge-nimi  { font-size: 0.7rem; color: #A78BFA; margin-top: 2px; }
+/* ── Lähetetty-näkymä ── */
+.lahetetty-kortti {
+    background: linear-gradient(135deg, #ECFDF5, #E0F7FF);
+    border: 2px solid #34D399; border-radius: 24px;
+    padding: 24px 20px; text-align: center; margin-bottom: 16px;
+}
+
+/* ── Saavutukset ── */
+.badge { display: inline-block; background: #F8F6FF; border: 1.5px solid #DDD6FF; border-radius: 12px; padding: 10px 10px; margin: 4px; text-align: center; min-width: 82px; }
+.badge.saavutettu { border-color: #7C3AED; background: linear-gradient(135deg, #EDE9FF, #E0F7FF); }
+.badge-ikoni { font-size: 1.6rem; }
+.badge-nimi  { font-size: 0.68rem; color: #A78BFA; margin-top: 3px; font-weight: 600; }
 .badge.saavutettu .badge-nimi { color: #5B21B6; }
 
-.playrn-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
-.playrn-header-nimi {
-    font-size: 1.8rem; font-weight: 800;
-    background: linear-gradient(90deg, #7C3AED, #38BDF8);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+/* ── Odottavat ── */
+.odottava-kortti {
+    background: #FFFBEB; border-left: 4px solid #F59E0B;
+    border-radius: 0 14px 14px 0; padding: 12px 16px; margin-bottom: 10px;
 }
-.playrn-header-tagline { font-size: 0.65rem; color: #C4B5FD; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* ── Vanhemman paneeli ── */
+.raportti-kortti {
+    background: #fff; border: 1.5px solid #E0E7FF;
+    border-radius: 16px; padding: 16px; margin-bottom: 10px;
+}
+.raportti-otsikko { font-size: 0.72rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; }
+.raportti-arvo    { font-size: 1.8rem; font-weight: 800; color: #1E1B4B; }
+
+/* ── Historia ── */
+.historia-rivi {
+    background: #fff; border: 1px solid #E0E7FF;
+    border-radius: 12px; padding: 12px 16px; margin-bottom: 8px; font-size: 0.9rem; color: #1E1B4B;
+    display: flex; align-items: center; gap: 10px;
+}
+.historia-ikoni { font-size: 1.2rem; }
+.historia-teksti { flex: 1; }
+.historia-aika { font-size: 0.75rem; color: #94A3B8; }
+
+/* ── Välilehti-otsikot ── */
+.tab-otsikko {
+    font-size: 1.2rem; font-weight: 800; color: #1E1B4B;
+    padding: 8px 0 16px 0; display: flex; align-items: center; gap: 8px;
+}
 </style>
 """
 st.markdown(CSS, unsafe_allow_html=True)
@@ -94,17 +151,18 @@ def saldo_kortti_html(nimi, saldo, vari, tavoite, valittu=False, putki=0):
     progress  = min(saldo / tavoite, 1.0) if tavoite > 0 else 0
     bar_width = int(progress * 100)
     tuli      = ("🔥" * min(putki, 3)) if putki > 0 else ""
-    putki_html = f'<div style="font-size:0.8rem;color:#F59E0B;margin-top:4px;">{tuli} {putki} pv putki</div>' if putki > 0 else ""
-    reuna  = f"3px solid {vari}" if valittu else f"1px solid {vari}"
-    shadow = f"0 0 0 2px {vari}, 0 8px 24px rgba(0,0,0,0.5)" if valittu else "none"
-    nosto  = "translateY(-3px)" if valittu else "translateY(0)"
-    check  = '<div style="position:absolute;top:10px;right:12px;font-size:1.1rem;">✅</div>' if valittu else ""
-    return f"""<div style="background:#fff;border:{reuna};border-radius:16px;padding:20px 16px 16px 16px;margin-bottom:8px;text-align:center;position:relative;box-shadow:{shadow};transform:{nosto};transition:transform 0.2s,box-shadow 0.2s;">
+    putki_html = f'<div style="font-size:0.82rem;color:#F59E0B;font-weight:700;margin-top:6px;">{tuli} {putki} pv putki</div>' if putki > 0 else ""
+    bg = f"linear-gradient(145deg, {vari}22, #fff)" if valittu else "#fff"
+    reuna  = f"2.5px solid {vari}" if valittu else f"1.5px solid #E0E7FF"
+    shadow = f"0 6px 24px {vari}33" if valittu else "0 2px 8px rgba(0,0,0,0.06)"
+    nosto  = "translateY(-4px)" if valittu else "translateY(0)"
+    check  = f'<div style="position:absolute;top:10px;right:10px;background:{vari};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;">✓</div>' if valittu else ""
+    return f"""<div style="background:{bg};border:{reuna};border-radius:20px;padding:18px 14px 14px 14px;margin-bottom:8px;text-align:center;position:relative;box-shadow:{shadow};transform:{nosto};transition:all 0.2s;">
 {check}
-<div style="font-size:0.85rem;color:{vari};margin-bottom:4px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">🎮 {nimi}</div>
-<div style="font-size:2.4rem;font-weight:800;color:#1E1B4B;line-height:1.1;">{saldo}<span style="font-size:0.9rem;color:#A78BFA;font-weight:400;"> min</span></div>
-<div style="background:#EDE9FF;border-radius:99px;height:10px;margin:10px 0 5px 0;overflow:hidden;"><div style="height:10px;border-radius:99px;background:{vari};width:{bar_width}%;"></div></div>
-<div style="font-size:0.75rem;color:#A78BFA;text-align:right;">{bar_width}% tavoitteesta ({tavoite} min)</div>
+<div style="font-size:0.8rem;color:{vari};margin-bottom:6px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">🎮 {nimi}</div>
+<div style="font-size:2.6rem;font-weight:800;color:#1E1B4B;line-height:1;">{saldo}<span style="font-size:0.9rem;color:#94A3B8;font-weight:500;"> min</span></div>
+<div style="background:#E0E7FF;border-radius:99px;height:8px;margin:10px 0 4px 0;overflow:hidden;"><div style="height:8px;border-radius:99px;background:linear-gradient(90deg,{vari},{vari}99);width:{bar_width}%;"></div></div>
+<div style="font-size:0.72rem;color:#94A3B8;text-align:right;">{bar_width}% / {tavoite} min</div>
 {putki_html}
 </div>"""
 
@@ -280,15 +338,16 @@ family    = st.session_state.family
 family_id = family["id"]
 tavoite   = family.get("tavoite_min", 90)
 
-st.markdown("""
-<div class="playrn-header">
-    <span class="playrn-header-nimi">Playrn</span>
-    <span class="playrn-header-tagline">Earn it. Play it.</span>
-</div>
-""", unsafe_allow_html=True)
-
-col_title, col_logout = st.columns([4, 1])
+col_logo, col_logout = st.columns([4, 1])
+with col_logo:
+    st.markdown("""
+    <div class="playrn-header">
+        <span class="playrn-header-nimi">Playrn</span>
+        <span class="playrn-header-tagline">Earn it. Play it.</span>
+    </div>
+    """, unsafe_allow_html=True)
 with col_logout:
+    st.write("")
     if st.button("🚪 Ulos", use_container_width=True):
         for k in list(st.session_state.keys()):
             del st.session_state[k]
@@ -310,19 +369,20 @@ with tab_pojat:
         vari_v  = LAPSI_VARIT[i_v % len(LAPSI_VARIT)]
 
         st.markdown(f"""
-        <div style="text-align:center;padding:40px 0 20px 0;">
-            <div style="font-size:4rem;">🎉</div>
-            <div style="font-size:1.5rem;font-weight:800;color:#E2E8F0;margin:10px 0 4px 0;">Lähetetty!</div>
-            <div style="font-size:1rem;color:#94A3B8;">Vanhempi tarkistaa työn pian.</div>
+        <div style="text-align:center;padding:32px 0 16px 0;">
+            <div style="font-size:5rem;line-height:1.1;">🎉</div>
+            <div style="font-size:1.8rem;font-weight:800;color:#1E1B4B;margin:12px 0 4px 0;">Huippua, {lapsi_v}!</div>
+            <div style="font-size:0.95rem;color:#64748B;">Vanhempi hyväksyy pian</div>
         </div>
-        <div class="vahvistus-kortti" style="border-color:{vari_v};">
-            <div class="vahvistus-tehtava">{tyo_v}</div>
-            <div class="vahvistus-min">+{min_v} min</div>
-            <div class="vahvistus-teksti">odottaa hyväksyntää</div>
+        <div class="lahetetty-kortti">
+            <div style="font-size:0.85rem;color:#059669;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Lähetetty hyväksyttäväksi</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#1E1B4B;margin-bottom:6px;">{tyo_v}</div>
+            <div style="font-size:2.8rem;font-weight:800;color:{vari_v};">+{min_v} min</div>
+            <div style="font-size:0.85rem;color:#64748B;margin-top:4px;">⏳ odottaa hyväksyntää</div>
         </div>
         """, unsafe_allow_html=True)
 
-        if st.button("⬅️ Takaisin alkuun", use_container_width=True):
+        if st.button("⬅️ Takaisin alkuun", use_container_width=True, type="primary"):
             st.session_state.lahetetty       = False
             st.session_state.valittu_lapsi   = None
             st.session_state.valittu_tehtava = None
@@ -343,15 +403,15 @@ with tab_pojat:
             bonus_teksti = " ⭐ BONUS" if tyo_obj["bonus"] else ""
 
             st.markdown(f"""
-            <div style="text-align:center;padding:16px 0 8px 0;">
-                <div style="font-size:0.85rem;color:#64748B;text-transform:uppercase;letter-spacing:0.05em;">Vahvista työ</div>
-                <div style="font-size:1.2rem;font-weight:700;color:{vari_n};margin-top:4px;">🎮 {lapsi_obj['nimi']}</div>
+            <div style="text-align:center;padding:12px 0 10px 0;">
+                <div style="font-size:0.75rem;color:#94A3B8;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Vahvista työ</div>
+                <div style="font-size:1.3rem;font-weight:800;color:{vari_n};margin-top:6px;">🎮 {lapsi_obj['nimi']}</div>
             </div>
             <div class="vahvistus-kortti" style="border-color:{vari_n};">
-                <div style="font-size:1.5rem;">{kat_ikoni}</div>
+                <div style="font-size:2.5rem;margin-bottom:8px;">{kat_ikoni}</div>
                 <div class="vahvistus-tehtava">{tyo_obj['nimi']}{bonus_teksti}</div>
                 <div class="vahvistus-min" style="color:{vari_n};">+{tyo_obj['minuutit']} min</div>
-                <div class="vahvistus-teksti">{tyo_obj['kategoria']}</div>
+                <div class="vahvistus-teksti">{tyo_obj['kategoria']} · peliaika ansaittu</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -415,20 +475,26 @@ with tab_pojat:
                         kat_tehtavat = [t for t in tehtavat() if t["kategoria"] == kat]
                         if not kat_tehtavat:
                             continue
-                        st.markdown(f"<div style='font-size:0.8rem;color:#94A3B8;text-transform:uppercase;letter-spacing:0.08em;margin:16px 0 8px 0;'>{kat_ikoni} {kat}</div>", unsafe_allow_html=True)
+                        st.markdown(f"""<div class="kat-otsikko"><span>{kat_ikoni}</span><span>{kat}</span><div class="kat-viiva"></div></div>""", unsafe_allow_html=True)
                         for tyo in sorted(kat_tehtavat, key=lambda x: x["minuutit"]):
+                            bonus_css = "tehtava-pts bonus" if tyo["bonus"] else "tehtava-pts"
                             bonus_merkki = " ⭐" if tyo["bonus"] else ""
-                            nappi_label  = f"{tyo['nimi']}{bonus_merkki}  ·  +{tyo['minuutit']} min"
-                            if st.button(nappi_label, key=f"tyonappi_{tyo['id']}", use_container_width=True):
+                            st.markdown(f"""
+                            <div class="tehtava-nappi" onclick="">
+                                <span class="tehtava-nimi">{tyo["nimi"]}{bonus_merkki}</span>
+                                <span class="{bonus_css}">+{tyo["minuutit"]} min</span>
+                            </div>""", unsafe_allow_html=True)
+                            if st.button(f"{tyo['nimi']}{bonus_merkki} · +{tyo['minuutit']} min",
+                                        key=f"tyonappi_{tyo['id']}", use_container_width=True):
                                 st.session_state.valittu_tehtava = tyo["nimi"]
                                 st.rerun()
 
-                    if st.button("❌ Sulje tehtävälista", use_container_width=True):
+                    if st.button("✕ Sulje", use_container_width=True):
                         st.session_state.valittu_lapsi = None
                         st.rerun()
 
-        st.markdown("---")
-        st.subheader("🏆 Saavutukset")
+        st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+        st.markdown('<div class="tab-otsikko">🏆 Saavutukset</div>', unsafe_allow_html=True)
         kaikki_lapset = lapset()
         if kaikki_lapset:
             sav_cols = st.columns(len(kaikki_lapset))
@@ -467,7 +533,7 @@ with tab_pojat:
 # VÄLILEHTI 2: VANHEMPI
 # ══════════════════════════════════════════════════════════════════════
 with tab_vanhempi:
-    st.subheader("🛡️ Vanhemman hallintapaneeli")
+    st.markdown('<div class="tab-otsikko">🛡️ Vanhemman paneeli</div>', unsafe_allow_html=True)
 
     if not st.session_state.vanhempi_kirjautunut:
         st.info("Syötä vanhemman PIN-koodi.")
@@ -488,7 +554,7 @@ with tab_vanhempi:
 
         st.markdown("---")
 
-        st.write("### 📋 Odottavat työt")
+        st.markdown("<div style='font-size:1rem;font-weight:700;color:#1E1B4B;margin-bottom:12px;'>📋 Odottavat työt</div>", unsafe_allow_html=True)
         odottavat = st.session_state.odottavat
         if not odottavat:
             st.info("Ei odottavia töitä. 👍")
@@ -765,46 +831,61 @@ with tab_vanhempi:
 # VÄLILEHTI 3: HISTORIA
 # ══════════════════════════════════════════════════════════════════════
 with tab_historia:
-    st.subheader("📜 Tapahtumahistoria")
+    st.markdown('<div class="tab-otsikko">📜 Historia</div>', unsafe_allow_html=True)
     historia = st.session_state.historia
 
     if not historia:
-        st.info("Ei vielä tapahtumia. Merkitse ensimmäinen kotityö! 🏠")
+        st.markdown("""
+        <div style="text-align:center;padding:40px 0;color:#94A3B8;">
+            <div style="font-size:3rem;margin-bottom:12px;">📭</div>
+            <div style="font-size:1rem;font-weight:600;">Ei vielä tapahtumia</div>
+            <div style="font-size:0.85rem;margin-top:4px;">Merkitse ensimmäinen kotityö!</div>
+        </div>
+        """, unsafe_allow_html=True)
     else:
         lapsi_nimet = [l["nimi"] for l in lapset()]
-        suodatin_vaihtoehdot = ["Kaikki"] + lapsi_nimet + ["Vain ansaitut", "Vain käytetty", "Vain hylätyt"]
-        suodatin = st.selectbox("Näytä:", suodatin_vaihtoehdot)
+        suodatin_vaihtoehdot = ["Kaikki"] + lapsi_nimet + ["Ansaitut", "Käytetty", "Hylätyt"]
+        suodatin = st.selectbox("Näytä:", suodatin_vaihtoehdot, label_visibility="collapsed")
 
         for merkinta in historia:
             tekija = merkinta.get("tekija_nimi", "?")
             if suodatin in lapsi_nimet and tekija != suodatin:
                 continue
-            if suodatin == "Vain ansaitut" and merkinta["tyyppi"] != "ansaittu":
+            if suodatin == "Ansaitut" and merkinta["tyyppi"] != "ansaittu":
                 continue
-            if suodatin == "Vain käytetty" and merkinta["tyyppi"] != "käytetty":
+            if suodatin == "Käytetty" and merkinta["tyyppi"] != "käytetty":
                 continue
-            if suodatin == "Vain hylätyt" and merkinta["tyyppi"] != "hylätty":
+            if suodatin == "Hylätyt" and merkinta["tyyppi"] != "hylätty":
                 continue
 
             if merkinta["tyyppi"] == "ansaittu":
-                ikoni      = "✅"
-                min_teksti = f'<span style="color:#10B981">+{merkinta["minuutit"]} min</span>'
+                ikoni = "✅"
+                vari_min = "#059669"
+                prefix = "+"
             elif merkinta["tyyppi"] == "käytetty":
-                ikoni      = "🎮"
-                min_teksti = f'<span style="color:#F59E0B">-{merkinta["minuutit"]} min</span>' if merkinta["minuutit"] > 0 else ""
+                ikoni = "🎮"
+                vari_min = "#D97706"
+                prefix = "-"
             else:
-                ikoni      = "❌"
-                min_teksti = ""
+                ikoni = "❌"
+                vari_min = "#DC2626"
+                prefix = ""
 
             try:
-                aika_fmt = datetime.fromisoformat(merkinta["luotu_at"]).strftime("%d.%m.%Y %H:%M")
+                aika_fmt = datetime.fromisoformat(merkinta["luotu_at"]).strftime("%d.%m. %H:%M")
             except Exception:
-                aika_fmt = merkinta.get("luotu_at", "")
+                aika_fmt = ""
+
+            min_html = f'<span style="font-weight:800;color:{vari_min};white-space:nowrap;">{prefix}{merkinta["minuutit"]} min</span>' if merkinta["minuutit"] > 0 else ""
 
             st.markdown(f"""
             <div class="historia-rivi">
-                {ikoni} <strong>{tekija}</strong> — {merkinta['tapahtuma']}
-                &nbsp;{min_teksti}
-                &nbsp;<span style="color:#475569;font-size:0.8rem">· {aika_fmt}</span>
+                <div class="historia-ikoni">{ikoni}</div>
+                <div class="historia-teksti">
+                    <span style="font-weight:700;color:#1E1B4B;">{tekija}</span>
+                    <span style="color:#64748B;"> — {merkinta["tapahtuma"]}</span>
+                </div>
+                {min_html}
+                <div class="historia-aika">{aika_fmt}</div>
             </div>
             """, unsafe_allow_html=True)
