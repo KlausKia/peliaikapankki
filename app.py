@@ -475,16 +475,10 @@ with tab_pojat:
                         kat_tehtavat = [t for t in tehtavat() if t["kategoria"] == kat]
                         if not kat_tehtavat:
                             continue
-                        st.markdown(f"""<div class="kat-otsikko"><span>{kat_ikoni}</span><span>{kat}</span><div class="kat-viiva"></div></div>""", unsafe_allow_html=True)
+                        st.markdown(f'<div class="kat-otsikko"><span>{kat_ikoni}</span><span>{kat}</span><div class="kat-viiva"></div></div>', unsafe_allow_html=True)
                         for tyo in sorted(kat_tehtavat, key=lambda x: x["minuutit"]):
-                            bonus_css = "tehtava-pts bonus" if tyo["bonus"] else "tehtava-pts"
                             bonus_merkki = " ⭐" if tyo["bonus"] else ""
-                            st.markdown(f"""
-                            <div class="tehtava-nappi" onclick="">
-                                <span class="tehtava-nimi">{tyo["nimi"]}{bonus_merkki}</span>
-                                <span class="{bonus_css}">+{tyo["minuutit"]} min</span>
-                            </div>""", unsafe_allow_html=True)
-                            if st.button(f"{tyo['nimi']}{bonus_merkki} · +{tyo['minuutit']} min",
+                            if st.button(f"{tyo['nimi']}{bonus_merkki}  ·  +{tyo['minuutit']} min",
                                         key=f"tyonappi_{tyo['id']}", use_container_width=True):
                                 st.session_state.valittu_tehtava = tyo["nimi"]
                                 st.rerun()
