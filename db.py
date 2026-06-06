@@ -5,6 +5,19 @@
 import streamlit as st
 from supabase import create_client, Client
 from datetime import datetime, timedelta
+import bcrypt
+
+def hashaa_pin(pin: str) -> str:
+    """Hashaa PIN bcrypt:llä tallennusta varten."""
+    return bcrypt.hashpw(pin.encode(), bcrypt.gensalt()).decode()
+
+def tarkista_pin(pin: str, hash: str) -> bool:
+    """Vertaa syötettyä PIN:iä tallennettuun hashiin."""
+    try:
+        return bcrypt.checkpw(pin.encode(), hash.encode())
+    except Exception:
+        # Tuki vanhoille selkoteksti-PIN:eille migraation aikana
+        return pin == hash
 
 # ── OLETUSTEHTÄVÄT uudelle perheelle ─────────────────────────────────
 OLETUSTEHTAVAT = [
@@ -45,8 +58,8 @@ def luo_perhe(tunnus: str, perhe_pin: str, admin_pin: str) -> dict:
     tunnus = tunnus.strip().lower()
     res = db().table("families").insert({
         "tunnus": tunnus,
-        "perhe_pin": perhe_pin,
-        "admin_pin": admin_pin,
+        "perhe_pin": hashaa_pin(perhe_pin),
+        "admin_pin": hashaa_pin(admin_pin),
         "tavoite_min": 90
     }).execute()
     family = res.data[0]
@@ -59,10 +72,10 @@ def luo_perhe(tunnus: str, perhe_pin: str, admin_pin: str) -> dict:
     return family
 
 def paivita_pinit(family_id: str, uusi_perhe_pin: str, uusi_admin_pin: str):
-    """Vanhempi vaihtaa PIN-koodit."""
+    """Vanhempi vaihtaa PIN-koodit — tallennetaan hashattuina."""
     db().table("families").update({
-        "perhe_pin": uusi_perhe_pin,
-        "admin_pin": uusi_admin_pin
+        "perhe_pin": hashaa_pin(uusi_perhe_pin),
+        "admin_pin": hashaa_pin(uusi_admin_pin)
     }).eq("id", family_id).execute()
 
 def paivita_tavoite(family_id: str, tavoite_min: int):
