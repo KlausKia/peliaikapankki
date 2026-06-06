@@ -219,7 +219,27 @@ if st.session_state.nakyma == "login":
         <div class="playrn-tagline">Earn it. Play it.</div>
     </div>
     """, unsafe_allow_html=True)
-    st.write("")
+
+    # Esittely uusille käyttäjille
+    st.markdown("""
+    <div style="display:flex;justify-content:center;gap:12px;margin:16px 0 20px 0;flex-wrap:wrap;">
+        <div style="background:#fff;border:1.5px solid #DDD6FF;border-radius:14px;padding:12px 14px;text-align:center;min-width:90px;flex:1;max-width:120px;">
+            <div style="font-size:1.6rem;">✅</div>
+            <div style="font-size:0.75rem;font-weight:700;color:#5B21B6;margin-top:4px;">Tee töitä</div>
+            <div style="font-size:0.68rem;color:#94A3B8;margin-top:2px;">Valitse tehtävä</div>
+        </div>
+        <div style="background:#fff;border:1.5px solid #BAE6FD;border-radius:14px;padding:12px 14px;text-align:center;min-width:90px;flex:1;max-width:120px;">
+            <div style="font-size:1.6rem;">⏱️</div>
+            <div style="font-size:0.75rem;font-weight:700;color:#0369A1;margin-top:4px;">Ansaitse</div>
+            <div style="font-size:0.68rem;color:#94A3B8;margin-top:2px;">Saat peliaikaa</div>
+        </div>
+        <div style="background:#fff;border:1.5px solid #BBF7D0;border-radius:14px;padding:12px 14px;text-align:center;min-width:90px;flex:1;max-width:120px;">
+            <div style="font-size:1.6rem;">🎮</div>
+            <div style="font-size:0.75rem;font-weight:700;color:#065F46;margin-top:4px;">Pelaa!</div>
+            <div style="font-size:0.68rem;color:#94A3B8;margin-top:2px;">Käytä aika</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     col_l, col_m, col_r = st.columns([1, 2, 1])
     with col_m:
@@ -233,7 +253,7 @@ if st.session_state.nakyma == "login":
                 perhe = db.hae_perhe_tunnuksella(tunnus)
                 if perhe is None:
                     st.error("Perhettä ei löydy. Tarkista tunnus tai luo uusi perhe.")
-                elif perhe["perhe_pin"] != pin:
+                elif not db.tarkista_pin(pin, perhe["perhe_pin"]):
                     st.error("Väärä PIN-koodi!")
                 else:
                     st.session_state.family = perhe
@@ -242,8 +262,8 @@ if st.session_state.nakyma == "login":
                     st.rerun()
 
         st.write("")
-        st.markdown("<div style='text-align:center;color:#64748B;font-size:0.85rem;'>Uusi perhe?</div>", unsafe_allow_html=True)
-        if st.button("✨ Luo uusi perhetunnus", use_container_width=True):
+        st.markdown("<div style='text-align:center;color:#94A3B8;font-size:0.82rem;margin-bottom:8px;'>Uusi perhe?</div>", unsafe_allow_html=True)
+        if st.button("✨ Luo uusi perhetunnus — ilmainen!", use_container_width=True):
             st.session_state.nakyma = "rekisterointi"
             st.rerun()
 
@@ -536,7 +556,7 @@ with tab_vanhempi:
             pin_syote = st.text_input("PIN", type="password", max_chars=6, key="admin_pin_input",
                                       label_visibility="collapsed", placeholder="• • • •")
             if st.button("🔓 Kirjaudu", use_container_width=True):
-                if pin_syote == family["admin_pin"]:
+                if db.tarkista_pin(pin_syote, family["admin_pin"]):
                     st.session_state.vanhempi_kirjautunut = True
                     st.rerun()
                 else:
