@@ -847,6 +847,19 @@ with tab_vanhempi:
                             st.success(f"'{poistettava_tyo}' poistettu.")
                             st.rerun()
 
+# ── PALAUTELINKKI (näkyy kaikilla välilehdillä) ──────────────────────
+st.markdown(f"""
+<div style="text-align:center;padding:24px 0 8px 0;border-top:1px solid #E0E7FF;margin-top:24px;">
+    <a href="{PALAUTE_LINKKI}" target="_blank" style="
+        display:inline-flex;align-items:center;gap:8px;
+        background:#F5F3FF;border:1.5px solid #DDD6FF;border-radius:12px;
+        padding:10px 20px;text-decoration:none;
+        font-size:0.85rem;font-weight:600;color:#5B21B6;
+    ">💬 Anna palautetta tai ilmoita virheestä</a>
+    <div style="font-size:0.72rem;color:#94A3B8;margin-top:8px;">Beta-versio · Kehitysvaiheessa</div>
+</div>
+""", unsafe_allow_html=True)
+
 # ══════════════════════════════════════════════════════════════════════
 # VÄLILEHTI 3: HISTORIA
 # ══════════════════════════════════════════════════════════════════════
